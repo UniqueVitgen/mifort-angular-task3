@@ -1,0 +1,14 @@
+<br>
+<div class="container">
+  <app-increment (increment)="increment($event)"></app-increment>
+  <app-default [increment]="incrementValue"></app-default>
+  <div class="row">
+    <div class="col-6 col-md-6">
+      <app-push [increment]="incrementValue"></app-push>
+    </div>
+    <div class="col-6 col-md-6">
+      <app-push-with-detection [increment]="incrementValue"></app-push-with-detection>
+    </div>
+  </div>
+</div>
+<br>

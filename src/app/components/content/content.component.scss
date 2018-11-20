@@ -1,0 +1,10 @@
+.row {
+  & > * {
+    &:first-child {
+      padding-right: 0;
+    }
+    &:last-child {
+      padding-left: 0;
+    }
+  }
+}

@@ -1,13 +1,13 @@
 import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Increment} from '../../classes/increment';
 
 @Component({
   selector: 'app-push',
   templateUrl: './push.component.html',
-  styleUrls: ['./push.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PushComponent implements OnInit, OnChanges {
-  @Input() increment: number;
+  @Input() increment: Increment;
 
   timeLeft = 60;
   interval;
@@ -31,8 +31,8 @@ export class PushComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.increment) {
-      this.timeLeft += this.increment;
+    if (this.increment && this.increment.value) {
+      this.timeLeft += this.increment.value;
     }
   }
 

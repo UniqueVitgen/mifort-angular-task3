@@ -1,12 +1,12 @@
 import {Component, Input, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import {Increment} from '../../classes/increment';
 
 @Component({
   selector: 'app-default',
-  templateUrl: './default.component.html',
-  styleUrls: ['./default.component.scss']
+  templateUrl: './default.component.html'
 })
 export class DefaultComponent implements OnInit, OnChanges {
-  @Input() increment: number;
+  @Input() increment: Increment;
   timeLeft = 60;
   interval;
 
@@ -30,8 +30,8 @@ export class DefaultComponent implements OnInit, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.increment) {
-      this.timeLeft += this.increment;
+    if (this.increment && this.increment.value) {
+      this.timeLeft += this.increment.value;
     }
   }
 

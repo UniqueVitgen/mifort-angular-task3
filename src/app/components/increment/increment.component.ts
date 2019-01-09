@@ -2,8 +2,7 @@ import {Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges} from 
 
 @Component({
   selector: 'app-increment',
-  templateUrl: './increment.component.html',
-  styleUrls: ['./increment.component.scss']
+  templateUrl: './increment.component.html'
 })
 export class IncrementComponent implements OnInit{
   incrementValue: number = 1000;

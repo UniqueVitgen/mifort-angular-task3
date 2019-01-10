@@ -6,17 +6,15 @@ import {Increment} from '../../classes/increment';
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss']
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent {
   incrementValue: Increment = new Increment();
   constructor() { }
 
-  ngOnInit() {
-  }
-
-  increment(value: number) {
-    this.incrementValue.value = value;
-    this.incrementValue.date = new Date();
-    this.incrementValue = Object.assign({}, this.incrementValue);
+  increment(value: number): void {
+    this.incrementValue = {
+      value: value,
+      date: new Date()
+    };
   }
 
 }

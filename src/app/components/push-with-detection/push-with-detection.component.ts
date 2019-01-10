@@ -6,37 +6,36 @@ import {Increment} from '../../classes/increment';
   templateUrl: './push-with-detection.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PushWithDetectionComponent implements OnInit, OnChanges {
-  @Input() increment: Increment;
-  timeLeft = 60;
-  interval;
+export class PushWithDetectionComponent implements OnInit {
+  _increment: Increment;
+  @Input()
+  get increment(): Increment {
+    return this._increment;
+  }
+  set increment(value: Increment) {
+    if (value) {
+      this._increment = value;
+      if (this._increment.value) {
+        this.timeLeft += this._increment.value;
+      }
+    }
+  }
+  timeLeft: number = 60;
+  interval: number;
 
-  startTimer() {
+  startTimer(): void {
     this.interval = setInterval(() => {
-      if (this.timeLeft > 0) {
         this.timeLeft++;
         this.cd.detectChanges();
-      } else {
-        this.timeLeft = 60;
-      }
     }, 1000);
   }
 
-  pauseTimer() {
+  pauseTimer(): void {
     clearInterval(this.interval);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.startTimer();
-  }
-
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('onChanges');
-    if (this.increment && this.increment.value) {
-      this.timeLeft += this.increment.value;
-      this.cd.detectChanges();
-    }
   }
 
   constructor(private cd: ChangeDetectorRef) { }

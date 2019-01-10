@@ -6,34 +6,36 @@ import {Increment} from '../../classes/increment';
   templateUrl: './push.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PushComponent implements OnInit, OnChanges {
-  @Input() increment: Increment;
-
-  timeLeft = 60;
-  interval;
-
-  startTimer() {
-    this.interval = setInterval(() => {
-      if (this.timeLeft > 0) {
-        this.timeLeft++;
-      } else {
-        this.timeLeft = 60;
+export class PushComponent implements OnInit {
+  _increment: Increment;
+  @Input()
+  get increment(): Increment {
+    return this._increment;
+  }
+  set increment(value: Increment) {
+    if (value) {
+      this._increment = value;
+      if (this._increment.value) {
+        this.timeLeft += this._increment.value;
       }
+    }
+  }
+
+  timeLeft: number = 60;
+  interval: number;
+
+  startTimer(): void {
+    this.interval = setInterval(() => {
+      this.timeLeft++;
     }, 1000);
   }
 
-  pauseTimer() {
+  pauseTimer(): void {
     clearInterval(this.interval);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.startTimer();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.increment && this.increment.value) {
-      this.timeLeft += this.increment.value;
-    }
   }
 
   constructor() { }

@@ -10,10 +10,10 @@ export class IncrementComponent implements OnInit{
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  increment() {
+  increment(): void {
     this.outputIncrement.emit(this.incrementValue);
   }
 
